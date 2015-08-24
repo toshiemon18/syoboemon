@@ -24,21 +24,25 @@ end
 url = "http://cal.syoboi.jp"
 rss_path = "/rss2.php"
 
-
-connection ||= Faraday::Connection.new(url: url) do |c|
-	c.use(Faraday::Request::UrlEncoded)
-	c.use(Faraday::Response::Logger)
-	c.use(Faraday::Adapter::NetHttp)
+begin
+	connection ||= Faraday::Connection.new(url: url) do |c|
+		c.request		:url_encoded
+		c.response	:logger
+		c.adapter		:net_http
+		c.response	:raise_error
+	end
+rescue e
+	puts "Connection error #{e}"
 end
 
-responce = connection.get(rss_path, {
+response = connection.get(rss_path, {
 	user: "#{user_name}",
 	filter: "0",
 	count: "3000",
 	days: "1",
 	titlefmt: "$(StTime) $(ShortTitle) $(SubTitleB) $(ChName) $(TID)"
 })
-query_data = TestCode::Item.parse(responce.body)
+query_data = TestCode::Item.parse(response.body)
 query_data.map { |e| e.title }
 query_data.each do |e|
 	puts e.title
