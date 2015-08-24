@@ -31,7 +31,7 @@ begin
 		c.adapter		:net_http
 		c.response	:raise_error
 	end
-rescue e
+rescue => e
 	puts "Connection error #{e}"
 end
 
