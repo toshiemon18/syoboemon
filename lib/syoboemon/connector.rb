@@ -2,10 +2,15 @@ module Syoboemon
 	class Connector
 		URL			= "http://cal.syoboi.jp"
 		RSS2_PATH	= "/rss2.php"
+		DB_PATH		= "/db.php"
 		JSON_PATH	= "/json.php"
 
 		def rss2_get(query)
 			connection.get(rss2_path, query)
+		end
+
+		def db_get(query)
+			connection.get(db_path, query)
 		end
 
 		def json_get(query)
@@ -29,6 +34,10 @@ module Syoboemon
 
 		def rss2_path
 			RSS2_PATH
+		end
+
+		def db_path
+			DB_PATH
 		end
 
 		def json_path
