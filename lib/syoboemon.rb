@@ -8,6 +8,8 @@ require 'happymapper'
 # ruby files
 require "syoboemon/version"
 
+
+
 module Syoboemon
   # Your code goes here...
 end

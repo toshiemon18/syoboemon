@@ -1,19 +1,18 @@
 module Syoboemon
 	class Connector
+		URL			= "http://cal.syoboi.jp"
+		RSS2_PATH	= "/rss2.php"
+		JSON_PATH	= "/json.php"
 
 		def rss2_get(query)
 			connection.get(rss2_path, query)
 		end
 
-		def db_get(query)
-			connection.get(db_path, query)
+		def json_get(query)
+			connection.get(json_path, query)
 		end
 
 		private
-
-		URL			= "http://cal.syoboi.jp"
-		RSS2_PATH	= "/rss2.php"
-		DB_PATH		= "/db.php"
 
 		def connection
 			connection ||= Faraday::Connection.new(url: url) do |c|
@@ -32,9 +31,8 @@ module Syoboemon
 			RSS2_PATH
 		end
 
-		def db_path
-			DB_PATH
+		def json_path
+			JSON_PATH
 		end
-
 	end
 end
