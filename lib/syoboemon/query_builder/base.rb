@@ -2,11 +2,12 @@ module Syoboemon
 	module QueryBuilder
 		class Base
 
-			attr_reader :query_params
+			attr_accessor :query_params
+			attr_reader :query
 
 			def initialize(query_params={})
 				@query_params = query_params
-				@query = "?"
+				@query = "?" + assemble_query()
 			end
 
 			def configure_parameter_attributes(attributes=[])
@@ -16,7 +17,7 @@ module Syoboemon
 			end
 
 			def assemble_query
-				@query << @query_params.map do |k, v|
+				@query_params.map do |k, v|
 					begin
 						k = determine_params_name_consistency(k)
 						"#{k}=#{v}"
