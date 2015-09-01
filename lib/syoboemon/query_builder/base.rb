@@ -2,17 +2,17 @@ module Syoboemon
 	module QueryBuilder
 		class Base
 
-			attr_reader :params
-
-			OPTIONS = {
-				rss2: [ "user", "filter", "count", "days", "titlefmt" ],
-				db: [ "TID", "LastUpdate", "Fields" ],
-				json: [ "Title", "Limit" ]
-			}
+			attr_reader :query_params
 
 			def initialize(query_params={})
 				@query_params = query_params
 				@query = "?"
+			end
+
+			def configure_parameter_attributes(attributes=[])
+				attributes.each do |elem|
+					parameoer_attributes << elem.to_s
+				end
 			end
 
 			def assemble_query
@@ -29,8 +29,10 @@ module Syoboemon
 
 			private
 
+			parameoer_attributes = []
+
 			def determine_params_name_consistency(attribute, api_type)
-				OPTIONS[api_type.to_sym].each_key do |key|
+				parameoer_attributes.each_key do |key|
 					if (/#{attribute}/i === key) then
 						return key
 					end
