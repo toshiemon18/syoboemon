@@ -5,10 +5,9 @@ require 'rubygems'
 require 'faraday'
 require 'happymapper'
 
-# ruby files
+# syoboemon files
 require "syoboemon/version"
-
-
+require "syoboemon/client"
 
 module Syoboemon
   # Your code goes here...
