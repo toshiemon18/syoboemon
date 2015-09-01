@@ -7,7 +7,7 @@ module Syoboemon
 
 			def initialize(query_params={})
 				@query_params = query_params
-				@query = "?" + assemble_query()
+				@query = "?" + assemble_query
 			end
 
 			def configure_parameter_attributes(attributes=[])
