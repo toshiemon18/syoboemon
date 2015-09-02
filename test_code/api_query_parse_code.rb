@@ -3,13 +3,6 @@ require 'faraday'
 
 user_name = ARGV[0]
 module TestCode
-	class QueryDataParser
-		include HappyMapper
-
-		tag "item"
-		element :item, Item
-	end
-
 	class Item
 		include HappyMapper
 
@@ -18,7 +11,7 @@ module TestCode
 		element :link, String
 		element :pubDate, DateTime
 		element :description, String
-end
+	end
 end
 
 url = "http://cal.syoboi.jp"
@@ -43,7 +36,10 @@ response = connection.get(rss_path, {
 	titlefmt: "$(StTime) $(ShortTitle) $(SubTitleB) $(ChName) $(TID)"
 })
 query_data = TestCode::Item.parse(response.body)
-query_data.map { |e| e.title }
-query_data.each do |e|
-	puts e.title
+TestCode::Item.elements.each do |e|
+	puts e.type.to_s.class
 end
+# query_data.map { |e| e.title }
+# query_data.each do |e|
+# 	puts e.title
+# end
