@@ -13,8 +13,6 @@ module Syoboemon
 			def configure_target_tag(tag_name)
 				tag tag_name
 			end
-				
-			end
 
 			def expand_analysis_target_elements(elements)
 				elements.each do |key, val|
