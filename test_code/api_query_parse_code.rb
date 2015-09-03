@@ -11,6 +11,7 @@ module TestCode
 		element :link, String
 		element :pubDate, DateTime
 		element :description, String
+
 	end
 end
 
@@ -36,9 +37,7 @@ response = connection.get(rss_path, {
 	titlefmt: "$(StTime) $(ShortTitle) $(SubTitleB) $(ChName) $(TID)"
 })
 query_data = TestCode::Item.parse(response.body)
-TestCode::Item.elements.each do |e|
-	puts e.type.to_s.class
-end
+puts query_data.class
 # query_data.map { |e| e.title }
 # query_data.each do |e|
 # 	puts e.title
