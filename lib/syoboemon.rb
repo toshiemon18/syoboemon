@@ -1,17 +1,24 @@
 $:.unshift File.dirname(__FILE__)
 
-# gems
+# ruby gems
 require 'rubygems'
 require 'faraday'
 require 'happymapper'
 
-# syoboemon files
-require "syoboemon/version"
-require "syoboemon/client"
-require "syoboemon/connector"
-require "syoboemon/query_builder/base"
-require "syoboemon/query_builder/program_basic_data"
+# syoboemon ruby files
+# version file
+require "./syoboemon/version"
+# Syoboemon::Client class
+require "./syoboemon/client"
+# Syoboemon::Connector
+require "./syoboemon/connector"
+# Syoboemon::QueryBuilder module
+require "./syoboemon/query_builder/base"
+require "./syoboemon/query_builder/program_basic_data"
+require "./syoboemon/query_builder/voice_actors_list"
+# Syoboemon::Parser module
+require "./syoboemon/parser/base"
 
 module Syoboemon
-  # Your code goes here...
+
 end
