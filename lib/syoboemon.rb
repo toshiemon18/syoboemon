@@ -7,7 +7,7 @@ require 'happymapper'
 require "json"
 
 # syoboemon ruby files
-# version file
+# Syoboemon::VERSION
 require "./syoboemon/version"
 # Syoboemon::Client class
 require "./syoboemon/client"
