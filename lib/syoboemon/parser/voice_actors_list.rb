@@ -3,9 +3,9 @@ module Syoboemon
 		class DB < Base
 
 			tag "TitleItem"
-			element "TID", String
-			element "Title", String
-			element "Comment", String
+			element :TID, String
+			element :Title, String
+			element :Comment, String
 
 		end
 
@@ -18,10 +18,6 @@ module Syoboemon
 			def parse
 				JSON.parse(@parse_data)
 			end
-
-		end
-
-		class VoiceActorsList
 
 		end
 	end
