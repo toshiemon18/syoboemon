@@ -32,7 +32,7 @@ module Syoboemon
 
 			parameoer_attributes = []
 
-			def determine_params_name_consistency(attribute, api_type)
+			def determine_params_name_consistency(attribute)
 				parameoer_attributes.each { |key| return key if /#{attribute}/i === key }
 				raise "Specified attribute does not exist."
 			end
