@@ -4,6 +4,7 @@ $:.unshift File.dirname(__FILE__)
 require 'rubygems'
 require 'faraday'
 require 'happymapper'
+require "json"
 
 # syoboemon ruby files
 # version file
