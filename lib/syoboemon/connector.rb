@@ -28,7 +28,6 @@ module Syoboemon
 			end
 
 			private
-
 			def connection
 				connection ||= Faraday::Connection.new(url: url) do |c|
 					c.request		:url_encoded
