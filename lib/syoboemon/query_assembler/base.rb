@@ -5,13 +5,6 @@ module Syoboemon
 
 			def initialize(params={})
 				@query_params = params
-				@parameter_attributes = []
-			end
-
-			def configure_parameter_attributes(attributes=[])
-				attributes.each do |elem|
-					@parameter_attributes << elem.to_s
-				end
 			end
 
 			def query_assemble
