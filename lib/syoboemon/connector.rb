@@ -1,3 +1,12 @@
+#
+# Syoboemon::Connector module
+#
+
+# しょぼいカレンダーAPIを利用するためのモジュール
+
+require "rubygems"
+require "faraday"
+
 module Syoboemon
 	module Connector
 		URL			= "http://cal.syoboi.jp"
@@ -6,16 +15,16 @@ module Syoboemon
 		JSON_PATH	= "/json.php"
 
 		class << self
-			def rss2_get(query)
-				connection.get(rss2_path, query)
+			def rss2_get(query_params={})
+				connection.get(rss2_path, query_params)
 			end
 
-			def db_get(query)
-				connection.get(db_path, query)
+			def db_get(query_params={})
+				connection.get(db_path, query_params)
 			end
 
-			def json_get(query)
-				connection.get(json_path, query)
+			def json_get(query_params={})
+				connection.get(json_path, query_params)
 			end
 
 			private
