@@ -1,8 +1,14 @@
+# 
+# Syoboemon::Parser::Base
+# 
+
 module Syoboemon
 	module Parser
 		class Base
-			include HappyMapper
-
+			private 
+			def method_name
+				
+			end
 		end
 	end
 end

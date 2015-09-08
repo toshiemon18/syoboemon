@@ -1,13 +1,15 @@
+# 
+# Syoboemon::Parser::Program BasicData < Base
+# 
+$LOAD_PATH.unshift File.dirname(__FILE__)
+require "./happy_parser/item"
+
 module Syoboemon
-	module Parser 
+	module Parser
 		class ProgramBasicData < Base
-
-			tag "Item"
-			element :title, String
-			element :link, String
-			element :pubDate, DateTime
-			element :description, String
-
+			def parse(xml_data)
+				return HappyParser::Item.parse(xml_data)
+			end
 		end
 	end
 end

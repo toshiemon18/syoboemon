@@ -1,17 +1,17 @@
 #
-# db.phpのレスポンスデータをパースするためのクラス
+# Syoboemon::Parser::HappyParser::TitleItem
 #
 
 module Syoboemon
 	module Parser
 		module HappyParser
 			class TitleItem
-					include HappyMapper
+				include HappyMapper
 
-					tag "TitleItem"
-					element :TID, String
-					element :Title, String
-					element :Comment, String
+				tag "TitleItem"
+				element :TID, String
+				element :Title, String
+				element :Comment, String
 			end
 		end
 	end

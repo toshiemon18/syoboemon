@@ -1,5 +1,5 @@
 #
-# rss2.phpのレスポンスデータをパースするためのクラス
+# Syoboemon::Parser::HappyParser::Item
 #
 
 module Syoboemon
