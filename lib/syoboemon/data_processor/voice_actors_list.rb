@@ -1,7 +1,7 @@
 module Syoboemon
-	module DataProcessor
-		class VoiceActorsList < Base
-			
-		end
-	end
+  module DataProcessor
+    class VoiceActorsList < Base
+
+    end
+  end
 end

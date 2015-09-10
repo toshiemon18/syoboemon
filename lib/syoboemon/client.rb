@@ -1,5 +1,5 @@
 module Syoboemon
-	class Client
-		
-	end
+  class Client
+
+  end
 end
