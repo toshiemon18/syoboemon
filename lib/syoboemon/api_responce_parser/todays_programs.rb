@@ -6,7 +6,7 @@ require "./happy_parser/item"
 
 module Syoboemon
 	module APIResponceParser
-		class TodaysProgram < Base
+		class TodaysPrograms < Base
 			def parse(xml_data)
 				return HappyParser::Item.parse(xml_data)
 			end
