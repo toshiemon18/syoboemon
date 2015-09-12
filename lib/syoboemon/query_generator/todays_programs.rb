@@ -2,10 +2,13 @@
 # Syoboemon::QueryGenerator::TodaysPrograms
 #
 
+# コンストラクタに渡されたユーザネームからrss2.phpのクエリを生成する
+
 module Syoboemon
 	module QueryGenerator
 		class TodaysPrograms
 			attr_accessor :usr
+			
 			def initialize(user_name="")
 				unless user_name.empty? then
 					@usr = user_name
