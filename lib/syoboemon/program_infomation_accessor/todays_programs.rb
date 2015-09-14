@@ -1,7 +1,7 @@
 module Syoboemon
-  module DataProcessor
-    class ProgramBasicData < Base
+	module ProgramInfomationAccessor
+		class TodaysPrograms
 
-    end
-  end
+		end
+	end
 end
