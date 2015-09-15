@@ -23,7 +23,7 @@ module Syoboemon
 					filer: "0",
 					count: "3000",
 					days: "1",
-					titlefmt: "$(StTime)-$(ShortTitle) $(SubTitleB)-$(ChName)-$(TID)-$(Cat)"
+					titlefmt: "$(StTime)-$(ShortTitle)-$(SubTitleB)-$(ChName)-$(TID)-$(Cat)"
 				}
 			end
 		end
