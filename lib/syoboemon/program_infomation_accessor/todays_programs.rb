@@ -11,29 +11,28 @@ module Syoboemon
 
 			def initialize(parsed_happymapper_object)
 				@connection_title_and_subtitle_flag = true
-				@todays_programs = parsed_happymapper_object
-				self.init_parameters_of_structure_members
-				self.set_up_parameters_of_structure_members
+				@todays_programs = parsed_happymapper_object.map {|e| e.title }
+				init_parameters_of_accessor_members
+				set_up_parameters_of_accessor_members
 			end
 
 			private
-			# 継承したStructのメンバを空の配列で初期化する
-			def init_parameters_of_structure_members
-				self.airtimes= []
-				self.titles= []
-				self.subtitles= []
-				self.broadcasters= []
-				self.title_ids= []
-				self.categories= []
+			def init_parameters_of_accessor_members
+				self.airtimes = []
+				self.titles = []
+				self.subtitles = []
+				self.broadcasters = []
+				self.title_ids = []
+				self.categories = []
 			end
-			
+
 			# 継承したStructureのメンバのパラメータを設定する
-			def set_up_parameters_of_structure_members
-				my_members_params = self.split_title_params
+			def set_up_parameters_of_accessor_members
+				my_members_params = split_title_params
 				my_members_params.each do |key, val|
-					self.send("#{key.to_s}=", val)
+					send("#{key.to_s}=", val)
 				end
-				self.connect_title_and_subtitle if @connection_title_and_subtitle_flag
+				connect_title_and_subtitle if @connection_title_and_subtitle_flag
 			end
 
 			# connection_title_and_subtitle_flag => trueの場合のみ呼ばれる
@@ -56,7 +55,7 @@ module Syoboemon
 			def split_title_params
 				program_params = {airtimes: [], titles: [], subtitles: [], broadcasters: [], title_ids: [], categories: [] }
 				@todays_programs.each do |p|
-					splited_title_strings = p.title.split("-")
+					splited_title_strings = p.split("-")
 					program_params.each_value.with_index { |val, i| val << splited_title_strings[i] }
 				end
 				return program_params
