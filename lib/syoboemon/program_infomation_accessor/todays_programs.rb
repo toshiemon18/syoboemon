@@ -17,7 +17,7 @@ module Syoboemon
 			end
 
 			private
-			def init_parameters_of_accessor_members
+			def init_parameters_of_structure_members
 				self.airtimes = []
 				self.titles = []
 				self.subtitles = []
@@ -27,7 +27,7 @@ module Syoboemon
 			end
 
 			# 継承したStructureのメンバのパラメータを設定する
-			def set_up_parameters_of_accessor_members
+			def set_up_parameters_of_structure_members
 				my_members_params = split_title_params
 				my_members_params.each do |key, val|
 					send("#{key.to_s}=", val)
