@@ -9,15 +9,15 @@ module Syoboemon
 		class TodaysPrograms < Struct.new(:airtimes, :titles, :subtitles, :broadcasters, :title_ids, :categories)
 			attr_accessor :connection_title_and_subtitle_flag
 
-			def initialize(parsed_happymapper_obj)
+			def initialize(parsed_happymapper_object)
 				@connection_title_and_subtitle_flag = true
-				@todays_programs = parsed_happymapper_obj
-				self.init_structure_parameters
-				self.set_up_attribute_values
+				@todays_programs = parsed_happymapper_object
+				self.init_parameters_of_structure_members
+				self.set_up_attributes_values
 			end
 
 			private 
-			def set_up_attribute_values
+			def set_up_attributes_values
 			end
 
 			# connection_title_and_subtitle_flag => trueの場合のみ呼ばれる
@@ -35,6 +35,8 @@ module Syoboemon
 				self.titles = new_titles
 			end
 
+			# タイトルの文字列を分解し、継承したStructureのメンバに対応するハッシュ要素にタイトルの各パラメータを格納していく
+			# 返り値はStructureのメンバ名をハッシュキーとし、それぞれが配列を持っているHashオブジェクト
 			def split_title_params
 				program_params = {airtimes: [], titles: [], subtitles: [], broadcasters: [], title_ids: [], categories: [] }
 				@todays_programs.each do |p|
@@ -45,7 +47,7 @@ module Syoboemon
 			end
 
 			# 継承したStructのメンバを空の配列で初期化する
-			def init_structure_parameters
+			def init_parameters_of_structure_members
 				self.airtimes = []
 				self.titles = []
 				self.subtitles = []
