@@ -2,7 +2,7 @@
 # Syoboemon::ProgramInfomationAccessor::TodaysPrograms
 # 
 
-# 現在時刻から1日分の放送番組に関する情報を参照するためのクラス
+# 取得した現在時刻から1日分の放送番組に関する情報を参照するためのクラス
 
 module Syoboemon
 	module ProgramInfomationAccessor
@@ -13,11 +13,27 @@ module Syoboemon
 				@connection_title_and_subtitle_flag = true
 				@todays_programs = parsed_happymapper_object
 				self.init_parameters_of_structure_members
-				self.set_up_attributes_values
+				self.set_up_parameters_of_structure_members
 			end
 
-			private 
-			def set_up_attributes_values
+			private
+			# 継承したStructのメンバを空の配列で初期化する
+			def init_parameters_of_structure_members
+				self.airtimes= []
+				self.titles= []
+				self.subtitles= []
+				self.broadcasters= []
+				self.title_ids= []
+				self.categories= []
+			end
+			
+			# 継承したStructureのメンバのパラメータを設定する
+			def set_up_parameters_of_structure_members
+				my_members_params = self.split_title_params
+				my_members_params.each do |key, val|
+					self.send("#{key.to_s}=", val)
+				end
+				self.connect_title_and_subtitle if @connection_title_and_subtitle_flag
 			end
 
 			# connection_title_and_subtitle_flag => trueの場合のみ呼ばれる
@@ -44,16 +60,6 @@ module Syoboemon
 					program_params.each_value.with_index { |val, i| val << splited_title_strings[i] }
 				end
 				return program_params
-			end
-
-			# 継承したStructのメンバを空の配列で初期化する
-			def init_parameters_of_structure_members
-				self.airtimes = []
-				self.titles = []
-				self.subtitles = []
-				self.broadcasters = []
-				self.title_ids = []
-				self.categories = []
 			end
 		end
 	end
