@@ -12,7 +12,7 @@ module Syoboemon
 			def initialize(parsed_happymapper_obj)
 				@connection_title_and_subtitle_flag = true
 				@todays_programs = parsed_happymapper_obj
-				self.init_struct_params
+				self.init_structure_parameters
 				self.set_up_attribute_values
 			end
 
@@ -20,23 +20,32 @@ module Syoboemon
 			def set_up_attribute_values
 			end
 
-			def connect_titles
+			# connection_title_and_subtitle_flag => trueの場合のみ呼ばれる
+			# titlesとsubtitlesの各要素を連結し、新しいtitlesの要素として格納する
+			def connect_title_and_subtitle
+				titles_tmp = self.titles
+				subtitles_tmp = self.subtitles
+				new_titles = titles_tmp.map.with_index do |title, i|
+					subtitle = subtitles_tmp[i]
+					subtitles_tmp[i] = nil
+					new_title = "#{title} #{subtitle}"
+				end
+				subtitles_tmp.reject! {|e| e.nil? }
+				self.subtitles = subtitles_tmp
+				self.titles = new_titles
 			end
 
 			def split_title_params
+				program_params = {airtimes: [], titles: [], subtitles: [], broadcasters: [], title_ids: [], categories: [] }
 				@todays_programs.each do |p|
-					title_params = p.title.split("-")
-					airtimes << title_params[0].to_s
-					titles << title_params[1].to_s
-					subtitles << title_params[2].to_s
-					broadcasters << title_params[3].to_s
-					title_ids << title_params[4].to_s
-					categories << title_params[5].to_s
+					splited_title_strings = p.title.split("-")
+					program_params.each_value.with_index { |val, i| val << splited_title_strings[i] }
 				end
+				return program_params
 			end
 
 			# 継承したStructのメンバを空の配列で初期化する
-			def init_struct_params
+			def init_structure_parameters
 				self.airtimes = []
 				self.titles = []
 				self.subtitles = []
