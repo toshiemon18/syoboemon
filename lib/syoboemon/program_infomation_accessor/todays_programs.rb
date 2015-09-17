@@ -4,59 +4,58 @@
 
 # 取得した現在時刻から1日分の放送番組に関する情報を参照するためのクラス
 
+class Array
+	def remove_other_than_animetion
+		self.reject {|p| p.category != "1"}
+	end
+end
+
 module Syoboemon
 	module ProgramInfomationAccessor
-		class TodaysPrograms < Struct.new(:airtimes, :titles, :subtitles, :broadcasters, :title_ids, :categories)
-			attr_accessor :connection_title_and_subtitle_flag
-
+		class TodaysPrograms
+			attr_reader :programs
 			def initialize(parsed_happymapper_object)
-				@connection_title_and_subtitle_flag = true
-				@todays_programs = parsed_happymapper_object.map {|e| e.title }
-				init_parameters_of_accessor_members
-				set_up_parameters_of_accessor_members
-			end
-
-			private
-			def init_parameters_of_structure_members
-				self.airtimes = []
-				self.titles = []
-				self.subtitles = []
-				self.broadcasters = []
-				self.title_ids = []
-				self.categories = []
-			end
-
-			# 継承したStructureのメンバのパラメータを設定する
-			def set_up_parameters_of_structure_members
-				my_members_params = split_title_params
-				my_members_params.each do |key, val|
-					send("#{key.to_s}=", val)
-				end
-				connect_title_and_subtitle if @connection_title_and_subtitle_flag
+				@todays_programs = parsed_happymapper_object.map(&:title)
+				@programs = set_up_structures_of_program_infomation
 			end
 
 			# connection_title_and_subtitle_flag => trueの場合のみ呼ばれる
 			# titlesとsubtitlesの各要素を連結し、新しいtitlesの要素として格納する
 			def connect_title_and_subtitle
-				titles_tmp = self.titles
-				subtitles_tmp = self.subtitles
-				new_titles = titles_tmp.map.with_index do |title, i|
-					subtitle = subtitles_tmp[i]
-					subtitles_tmp[i] = nil
-					new_title = "#{title} #{subtitle}"
+				programs_tmp = self.programs
+				new_programs = programs_tmp.map do |p|
+					subtitle = p.subtitle
+					p.subtitle = nil
+					p.title += "#{subtitle}"
 				end
-				subtitles_tmp.reject! {|e| e.nil? }
-				self.subtitles = subtitles_tmp
-				self.titles = new_titles
+				self.programs = new_programs
 			end
 
-			# タイトルの文字列を分解し、継承したStructureのメンバに対応するハッシュ要素にタイトルの各パラメータを格納していく
-			# 返り値はStructureのメンバ名をハッシュキーとし、それぞれが配列を持っているHashオブジェクト
+			private
+			def set_up_structures_of_program_infomation
+				struct_params = split_title_params
+				program_structure_ary = struct_params.map do |p|
+					struct = Struct.new(:airtime, :title, :subtitle, :broadcaster, :title_id, :category)
+					struct.new(p[:airtime], p[:title], p[:subtitle], p[:broadcaster], p[:title_id], p[:category])
+				end
+				return program_structure_ary
+			end
+
+			# # 自身のメンバの配列の要素を分解し、各配列の要素を保持した構造体を要素とする新しい配列を返す
+			# # => Struct([a1, a2...], [b1, b2...], [c1, c2...]...) => [Struct(a1, b1, c1), Struct(a2, b2, c2)...]
+			# def convert_to_array_of_structure_from_self
+			# 	self.titles.size.times do |num|
+			# 		struct = Struct.new(:airtime, :title, :subtitle, :broadcaster, :title_id, :category)
+			# 		struct_params = self.members.map {|sym| self.send("#{sym}")[num]}
+			# 		struct.members.each.with_index {|sym, i| struct.send("#{sym}=", struct_params[i])}
+			# 		@program_infos << struct
+			# 	end
+			# end
+
 			def split_title_params
-				program_params = {airtimes: [], titles: [], subtitles: [], broadcasters: [], title_ids: [], categories: [] }
-				@todays_programs.each do |p|
-					splited_title_strings = p.split("-")
-					program_params.each_value.with_index { |val, i| val << splited_title_strings[i] }
+				program_params = @todays_programs.map do |p|
+					t = p.split("-")
+					hash = { airtime: t[0], title: t[1], subtitle: t[2], broadcaster: t[3], title_id: t[4], category: t[5] }
 				end
 				return program_params
 			end
