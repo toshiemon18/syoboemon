@@ -5,8 +5,12 @@
 # 取得した現在時刻から1日分の放送番組に関する情報を参照するためのクラス
 
 class Array
-	def remove_other_than_animetion
-		self.reject {|p| p.category != "1"}
+	def remove_other_than_anime
+		self.reject {|p| p.category.match(/0|2|3|6/)}
+	end
+
+	def remove_other_than_radio
+		self.reject {|p| not p.category.match(/2/)}
 	end
 end
 
