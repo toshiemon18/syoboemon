@@ -41,17 +41,6 @@ module Syoboemon
 				return program_structure_ary
 			end
 
-			# # 自身のメンバの配列の要素を分解し、各配列の要素を保持した構造体を要素とする新しい配列を返す
-			# # => Struct([a1, a2...], [b1, b2...], [c1, c2...]...) => [Struct(a1, b1, c1), Struct(a2, b2, c2)...]
-			# def convert_to_array_of_structure_from_self
-			# 	self.titles.size.times do |num|
-			# 		struct = Struct.new(:airtime, :title, :subtitle, :broadcaster, :title_id, :category)
-			# 		struct_params = self.members.map {|sym| self.send("#{sym}")[num]}
-			# 		struct.members.each.with_index {|sym, i| struct.send("#{sym}=", struct_params[i])}
-			# 		@program_infos << struct
-			# 	end
-			# end
-
 			def split_title_params
 				program_params = @todays_programs.map do |p|
 					t = p.split("-")
