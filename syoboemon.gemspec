@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{shoboi calendar API wrapper.}
   spec.description   = %q{しょぼいカレンダーのAPIﾗｯﾊﾟｯﾊﾟ. 他の人も作ってたけど自分が欲しい情報引っ張ってくる機能が無かったので自力で実装してる.}
-  spec.homepage      = "https://github.toshiemon18"
+  spec.homepage      = "https://github.toshiemon18/syoboemon"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
@@ -23,7 +23,6 @@ Gem::Specification.new do |spec|
   end
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
