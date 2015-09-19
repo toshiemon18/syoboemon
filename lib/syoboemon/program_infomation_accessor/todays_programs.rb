@@ -17,7 +17,7 @@ end
 module Syoboemon
 	module ProgramInfomationAccessor
 		class TodaysPrograms
-			attr_reader :programs
+			attr_accessor :programs
 			def initialize(parsed_happymapper_object)
 				@todays_programs = parsed_happymapper_object.map(&:title)
 				@programs = set_up_structures_of_program_infomation
