@@ -12,6 +12,7 @@ module Syoboemon
   	end
 
   	def search_program(title="")
+  		
   	end
   end
 end
