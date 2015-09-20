@@ -13,11 +13,7 @@ module Syoboemon
 				attr_accessor :title_id
 
 				def initialize(title_id="")
-					unless title_id.empty? then
-						@tid= title_id
-					else
-						raise "Please enter title id"
-					end
+					@tid = title_id.to_s
 				end
 
 				def generate_query
@@ -32,11 +28,7 @@ module Syoboemon
 				attr_accessor :title
 
 				def initialize(title="")
-					unless title.empty? then
-						@title = title
-					else
-						raise "Please enter title"
-					end
+					@title = title.to_s
 				end
 
 				def generate_query

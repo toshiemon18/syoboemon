@@ -10,11 +10,7 @@ module Syoboemon
 			attr_accessor :usr
 			
 			def initialize(user_name="")
-				unless user_name.empty? then
-					@usr = user_name
-				else
-					raise "Please enter your account name."
-				end
+				@usr = user_name.to_s
 			end
 
 			def generate_query
