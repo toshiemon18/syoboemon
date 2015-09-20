@@ -30,7 +30,7 @@ module Syoboemon
       # 〜(n-1) => エンディングテーマ（複数ある場合はｓの数だけ）
       # n => キャスト（各キャラクターの配役）
       def split_params_of_comment
-        split_pattern = /スタッフ.+|キャスト.+|(オープニング|エンディング).+/
+        split_pattern = /スタッフ.+|キャスト.+|(オープニング|エンディング).+/m
         comment = @results_of_program.Comment
         program_detail_params = comment.split("*").reject {|e| not e.match(split_pattern)}
         return program_detail_params
@@ -38,9 +38,9 @@ module Syoboemon
 
       # スタッフまたはキャストのリストを返す
       def set_up_staff_or_cast_params(string_of_staff_or_cast)
-        string_of_staff_or_cast.split("¥n").map do |s|
+        string_of_staff_or_cast.split(/$./m).map do |s|
           p = s.match(/:(.+?):(.+)/)
-          str = "#{p[1]}:#{p[2]}"
+          str = "#{p[1]}:#{p[2]}" unless p.nil?
         end
       end
 
