@@ -15,14 +15,14 @@ module Syoboemon
 		JSON_PATH = "/json.php"
 
 		class << self
-			# APIConnector#rss2_get, APIConnector#db_get, APIConnector#json_getについて
+			# APIConnector#get_rss2, APIConnector#get_db, APIConnector#get_jsonについて
 			# 引数にはAPIのパラメータをまとめたHashを渡すこと
 
 			# rss2.phpを利用するためのメソッド
 			# Example => APIConnector.rss2_get({usr: "example_name", filter: 0, count: 150, ...})
-			def rss2_get(query_params={})
+			def get_rss2(query_params={})
 				begin
-					connection.get(rss2_path, query_params)
+					return connector.get(rss2_path, query_params).body
 				rescue => e
 					puts "#{e.messege}"
 					exit
@@ -31,9 +31,9 @@ module Syoboemon
 
 			# db.phpを利用するためのメソッド
 			# Example => APIConnector.db_get({Command: "TitleLookup", TID: 9029, Fields: "Comment,TID..."})
-			def db_get(query_params={})
+			def get_db(query_params={})
 				begin
-					connection.get(db_path, query_params)
+					return connector.get(db_path, query_params).body
 				rescue => e
 					puts "#{e.message}"
 					exit
@@ -42,9 +42,9 @@ module Syoboemon
 
 			# json.phpを利用するためのメソッド
 			# Example => APIConnector.json_get({Req: "TitleSearch", Title: "ご注文はうさぎですか？", Limit: 15})
-			def json_get(query_params={})
+			def get_json(query_params={})
 				begin
-					connection.get(json_path, query_params)
+					return connector.get(json_path, query_params).body
 				rescue => e
 					puts "#{e.message}"
 					exit
@@ -52,8 +52,8 @@ module Syoboemon
 			end
 
 			private
-			def connection
-				connection ||= Faraday::Connection.new(url: url) do |c|
+			def connector
+				connector ||= Faraday::Connection.new(url: url) do |c|
 					c.request :url_encoded
 					c.response :logger
 					c.adapter :net_http
