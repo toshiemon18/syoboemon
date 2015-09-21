@@ -14,9 +14,9 @@ module Syoboemon
   	def search_program(title_str="")
   		title = title_str.to_s
   		tid = fetch_title_id(title)
-  		query_params = QueryGenerator::ProgramDetailSearch::DB.new(tid.to_s)
+  		query_params = QueryGenerator::ProgramDetailSearch::DB.new(tid).generate_query
       api_response = APIConnector.get_db(query_params)
-      return ProgramInfomationAccessor::ProgramDetailSearch.new(APIResponseParser::TitleItem.parse(api_response))
+      return ProgramInfomationAccessor::ProgramDetailSearch.new(APIResponseParser::TitleItem.parse(api_response)[0])
   	end
 
   	private
