@@ -10,16 +10,14 @@ module Syoboemon
 	module QueryGenerator
 		module ProgramDetailSearch
 			class DB
-				attr_accessor :title_id
-
 				def initialize(title_id="")
 					@tid = title_id.to_s
 				end
 
 				def generate_query
 					query = {
-						Commend: "TitleLookup",
-						TID: @tid.to_s
+						:Commend => "TitleLookup",
+						:TID => @tid.to_s
 					}
 				end
 			end
@@ -33,9 +31,9 @@ module Syoboemon
 
 				def generate_query
 					query = {
-						Req: "TitleSearch",
-						Title: @title.to_s,
-						Limit: 15
+						:Req => "TitleSearch",
+						:Search => "#{@title.to_s}",
+						:Limit => 1
 					}
 				end
 			end

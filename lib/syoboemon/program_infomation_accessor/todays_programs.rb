@@ -48,7 +48,7 @@ module Syoboemon
 			def split_title_params
 				program_params = @todays_programs.map do |p|
 					t = p.split("-")
-					hash = { airtime: t[0], title: t[1], subtitle: t[2], broadcaster: t[3], title_id: t[4], category: t[5] }
+					hash = {airtime: t[0], title: t[1], subtitle: t[2], broadcaster: t[3], title_id: t[4], category: t[5]}
 				end
 				return program_params
 			end
