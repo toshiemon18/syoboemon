@@ -11,7 +11,7 @@ require "./syoboemon/version" # Syoboemon::VERSION
 require "./syoboemon/client" # Syoboemon::Client
 require "./syoboemon/api_connector" #Syoboemon::APIConnector
 # Syoboemon::APIResponceParser
-require "./syoboemon/api_responce_parser/program_detail_search"
+require "./syoboemon/api_responce_parser/api_response_parser"
 # Syoboemon::QueryGenerator
 require "./syoboemon/query_generator/program_detail_search"
 require "./syoboemon/query_generator/todays_programs"
