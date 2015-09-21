@@ -16,7 +16,7 @@ module Syoboemon
 
 				def generate_query
 					query = {
-						:Commend => "TitleLookup",
+						:Command => "TitleLookup",
 						:TID => @tid.to_s
 					}
 				end
