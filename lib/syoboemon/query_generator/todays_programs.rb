@@ -15,7 +15,7 @@ module Syoboemon
 
 			def generate_query
 				query = {
-					usr: @usr.to_s,
+					usr: "#{@usr.to_s}",
 					filer: "0",
 					count: "3000",
 					days: "1",

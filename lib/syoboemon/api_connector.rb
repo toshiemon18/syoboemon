@@ -4,9 +4,6 @@
 
 # しょぼいカレンダーAPIを利用するためのモジュール
 
-require "rubygems"
-require "faraday"
-
 module Syoboemon
 	module APIConnector
 		URL = "http://cal.syoboi.jp"
@@ -55,8 +52,8 @@ module Syoboemon
 			def connector
 				connector ||= Faraday::Connection.new(url: url) do |c|
 					c.request :url_encoded
-					c.response :logger
 					c.adapter :net_http
+					# c.response :logger
 					c.response :raise_error
 				end
 			end
