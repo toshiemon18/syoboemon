@@ -1,0 +1,8 @@
+require "syoboemon"
+
+usr_name = ARGV[0].to_s
+
+client = Syoboemon::Client.new
+client.today_programs(usr_name).programs.remove_other_than_radio.each do |prog|
+    puts "#{prog.airtime} #{prog.title} [#{prog.broadcaster}]"
+end
