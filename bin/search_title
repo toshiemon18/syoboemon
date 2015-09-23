@@ -1,6 +1,7 @@
 require "syoboemon"
 
-title = ARGV[0].to_s
+# title = ARGV[0].to_s
+title = ARGV.join(" ")
 
 client = Syoboemon::Client.new
 search_res = client.search_program(title)
