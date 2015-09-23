@@ -1,0 +1,20 @@
+require "./../lib/syoboemon"
+
+title = ARGV[0].to_s
+
+client = Syoboemon::Client.new
+search_res = client.search_program(title)
+puts "Title : #{search_res.title}(#{search_res.title_id})"
+puts
+
+puts "Opening and ending themes"
+search_res.opening.each.with_index {|op, i| puts "OP#{i + 1} : #{op}" unless op.empty?}
+search_res.ending.each.with_index {|ed, i| puts "ED#{i + 1} : #{ed}" unless ed.empty?}
+puts
+
+print "Staffs"
+search_res.staffs.first(10).each {|staff| puts "#{staff.to_s}"}
+puts 
+
+print "Casts" 
+search_res.casts.first(10).each {|cast| puts "#{cast.to_s}"}
